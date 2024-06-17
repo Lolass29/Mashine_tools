@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # local
     'info.apps.InfoConfig',
+    'my_site',
 ]
 
 MIDDLEWARE = [

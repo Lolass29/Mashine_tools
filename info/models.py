@@ -39,4 +39,4 @@ class Model_Mashine_Tools(models.Model):
         ordering = ['company', 'price']
 
     def __str__(self):
-        return f"{self.name} {self.image} {str(self.company)} {self.price}"
+        return f"{self.name} {self.company} {self.price}"
