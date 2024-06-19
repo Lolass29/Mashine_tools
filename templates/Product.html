@@ -51,7 +51,9 @@
     <div class="product-container">
         {% for my_info_item in my_info_objects %}
             <div class="product-card">
-                <img src="{{ db.sqlite3.my_info_item.image }}" alt="Product 1">
+                {% if my_info_item.image %}
+                    <img src="{{ my_info_item.image.url }}" alt="{{ my_info_item.name }}">
+                {% endif %}
                 <h3>{{ my_info_item.name }}</h3>
                 <p>{{ my_info_item.price }}$</p>
                 <button>Add to Cart</button>
