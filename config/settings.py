@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os.path
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -74,8 +76,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 MEDIA_URL = ''
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = reverse_lazy("profile")
+LOGOUT_REDIRECT_URL = 'web:profile'
+
+# Users
+
+AUTH_USER_MODEL = 'my_site.User'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

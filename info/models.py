@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import EmailField
+from django.contrib.auth.models import AbstractUser
 
 
 class Company(models.Model):
@@ -42,11 +43,3 @@ class Model_Mashine_Tools(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.company} {self.price}"
-
-
-class RegistrationForm(UserCreationForm):
-    email = EmailField()
-
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
