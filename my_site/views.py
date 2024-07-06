@@ -20,18 +20,6 @@ def profile_view(request):
     return render(request, 'web/profile.html')
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse_lazy('login'))
-#     else:
-#         form = UserRegistrationForm()
-#     context = {'form': form}
-#     return render(request, 'register.html', context)
-
-
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)

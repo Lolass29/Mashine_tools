@@ -5,10 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog</title>
     <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header-nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-nav li {
+            margin-left: 20px;
+        }
+
+        .header-nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .header-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile-info {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1;
+        }
+
+        .profile-info.show {
+            display: block;
+        }
+
+        .header-profile:hover .profile-info,
+        .profile-info:hover {
+            display: block;
+        }
+        
         .product-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin-top: 30px;
         }
 
         .product-card {
@@ -48,6 +114,28 @@
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="header-logo">Product Catalog</div>
+        <div class="header-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="header-profile">
+            {% if user.image %}
+                <img src="{{ user.image.url }}" alt="{{ user.username }}">
+            {% endif %}
+            <div class="profile-info" id="profile-info">
+                <h3>{{ user.username }}</h3>
+                <p>Email: {{ user.email }}</p>
+                <button id="logout-btn" onclick="location.href='{% url 'login' %}'">Log Out</button>
+            </div>
+        </div>
+    </div>
+
     <div class="product-container">
         {% for my_info_item in my_info_objects %}
             <div class="product-card">
@@ -60,5 +148,32 @@
             </div>
         {% endfor %}
     </div>
+
+    <script>
+        const profileImage = document.getElementById('profile-image');
+        const profileInfo = document.getElementById('profile-info');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        profileImage.addEventListener('mouseenter', () => {
+            profileInfo.classList.add('show');
+        });
+
+        profileImage.addEventListener('mouseleave', () => {
+            profileInfo.classList.remove('show');
+        });
+
+        profileInfo.addEventListener('mouseenter', () => {
+            profileInfo.classList.add('show');
+        });
+
+        profileInfo.addEventListener('mouseleave', () => {
+            profileInfo.classList.remove('show');
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            // Добавьте сюда код для выхода из аккаунта
+            console.log('Выход из аккаунта');
+        });
+    </script>
 </body>
 </html>
